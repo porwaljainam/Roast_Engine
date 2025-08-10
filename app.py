@@ -194,4 +194,4 @@ if name:
             st.rerun()
 
         if st.button("Exit ❌"):
-            sys.exit()
+            st.stop()
