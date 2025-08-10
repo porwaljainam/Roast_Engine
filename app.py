@@ -57,6 +57,10 @@ st.write("Kabhi kabhi gussa nikalna bhi zaroori hota hai...")
 # Get user input
 name = st.text_input("Bol Bhai Kis Pr Tujhe Gussa Aarha Hai?", placeholder="Uska Naam Likho Yahan")
 
+if name == "jaianm":
+   st.write("FUCK You")
+   exit()
+   
 level = st.radio(
     "Roast level choose kar:",
     options=["Non-Vulger", "Full-Vulger🌶️"],
