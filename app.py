@@ -1,13 +1,12 @@
 import streamlit as st
 import random
+import sys
 
 st.set_page_config(page_title="Roast Engine", page_icon="🔥")
 
-# ----------------------------
-# TAUNTS LISTS
-# ----------------------------
-
+# Combined Taunts
 savage_taunts = [
+    # Original 20
     "Tu itna bekaar hai, tujhe dekhke traffic signal bhi ignore kar deta hai.",
     "Tera IQ room temperature se bhi kam hai.",
     "Tujhse zyada value toh expired curd mein hoti hai.",
@@ -28,66 +27,61 @@ savage_taunts = [
     "Tu jab bolta hai, toh lagta hai mute button invent kyun nahi hua tere liye.",
     "Tera attitude toh AirPods jaisa hai—mehenga bhi aur bekaar bhi.",
     "Tujhse milke lagta hai, insaan ka version rollback ho gaya hai.",
-    "Tera logic Windows Vista se bhi outdated hai.",
-    "Tu Google Maps hota toh sabko jungle mein le jaata.",
-    "Tere jokes se zyada stale toh last week ka bread hai.",
-    "Tera brain buffering mode mein atka hua hai.",
-    "Tere saath rehna matlab battery drain mode on karna.",
-    # --------------------
-    # EXTRA 50 SAVAGE TAUNTS
-    # --------------------
-    "Tera dimaag Windows XP update ka intezar kar raha hai.",
-    "Tu woh YouTube ad hai jo skip bhi nahi hota.",
-    "Tere ideas Ctrl+Alt+Del se bhi nahi aate.",
-    "Tu life ka low-battery notification hai.",
-    "Tere saath friendship karna system crash karne jaisa hai.",
-    "Tu offline mode ka human version hai.",
-    "Tera confidence ek expired sim card jaisa hai.",
-    "Tu emojis ka bhi mood kharab kar deta hai.",
-    "Tera sense of humor recycle bin mein milta hai.",
-    "Tere saath time pass matlab wasted investment.",
-    "Tera personality Windows error sound jaisa hai.",
-    "Tu woh pop-up hai jo hamesha galat waqt pe aata hai.",
-    "Tere saath baat karke bandwidth waste hota hai.",
-    "Tu charger ke bina phone jaisa hai – useless.",
-    "Tere dreams bhi buffering pe atke hue hain.",
-    "Tu ek walking spam folder hai.",
-    "Tere ideas ek broken pencil jaisa – pointless.",
-    "Tu WhatsApp ke ‘last seen’ jaisa – irrelevant.",
-    "Tere presence se WiFi signal kam ho jaata hai.",
-    "Tu life ka ‘Page Not Found’ error hai.",
-    "Tu PowerPoint ka slide without content hai.",
-    "Tere jokes par crickets bhi silence ho jaate hain.",
-    "Tu battery saver mode ka bhi downgrade hai.",
-    "Tera kaam hamesha ‘loading’ pe atka rehta hai.",
-    "Tu ek expired OTP ka human form hai.",
-    "Tere words ek failed captcha jaisa hai.",
-    "Tu ek app update jaisa hai jo sirf bugs laya hai.",
-    "Tu calculator ka bhi wrong answer hai.",
-    "Tera brain ek muted microphone jaisa hai.",
-    "Tere ideas ek hidden file ki tarah useless hain.",
-    "Tu ek broken link ka insaan hai.",
-    "Tere saath kaam karna slow motion video jaisa hai.",
-    "Tere decisions auto-correct ki galti se bhi bure hain.",
-    "Tu ek uncharged power bank hai.",
-    "Tere excuses ek slow download jaisa hai.",
-    "Tere jokes se log airplane mode pe chale jaate hain.",
-    "Tu ek fake loading bar ka insaan hai.",
-    "Tere presence se Google bhi answer dena band kar deta hai.",
-    "Tu ek 404 ka permanent version hai.",
-    "Tere plans ek failed startup jaisa hai.",
-    "Tu ek cloud storage without space hai.",
-    "Tera brain ek frozen screen hai.",
-    "Tere saath life safe mode me chalti hai.",
-    "Tu ek app crash ka live demo hai.",
-    "Tere liye motivation quotes bhi kaam nahi karte.",
-    "Tu ek lagging game ka insaan hai.",
-    "Tere decisions ek spam call jaisa hai.",
-    "Tu ek unsaved document ka insaan hai.",
-    "Tere ideas ek blank page jaisa hai."
+    # +50 more
+    "Tu utna useful hai jitna underwater umbrella.",
+    "Tere ideas toh expired memes jaise hain.",
+    "Tujhe dekhke lagta hai universe ka bug fix hona baaki hai.",
+    "Tera logic Windows Vista jaise slow hai.",
+    "Tu vo auto-reply hai jo hamesha wrong hota hai.",
+    "Tere jokes sunke crickets bhi so jaate hain.",
+    "Tu toothpaste ka cap lose karne wala insan hai.",
+    "Tere presence se WiFi ka signal kam ho jata hai.",
+    "Tera self-esteem free trial pe chal raha hai.",
+    "Tu vo buffering circle hai jo kabhi khatam nahi hota.",
+    "Tere actions Ctrl+Z se bhi undo nahi hote.",
+    "Tu utna rare hai jitna working government office phone line.",
+    "Tera brain single-core processor pe chal raha hai.",
+    "Tu vo pop-up ad hai jo sabko irritate karta hai.",
+    "Tere advice ka value spam folder jaisa hai.",
+    "Tujhe dekhke lagta hai common sense extinct ho gaya hai.",
+    "Tere expressions low battery icon jaise hain.",
+    "Tu vo playlist hai jisme bas skip-worthy songs hain.",
+    "Tera style Windows 98 wallpaper jaisa hai.",
+    "Tu utna reliable hai jitna rainy season ka umbrella.",
+    "Tera existence ek unwanted app update jaisa hai.",
+    "Tere answers 404 error jaise hain.",
+    "Tu vo alarm hai jo kabhi ring nahi karta.",
+    "Tera kaam half-downloaded file jaisa hai.",
+    "Tere decisions coin toss se bhi bekaar hain.",
+    "Tu vo keyboard key hai jo kabhi kaam nahi aati.",
+    "Tera attitude USB 1.0 speed pe chal raha hai.",
+    "Tere skills photocopy machine pe jam hua paper jaise hain.",
+    "Tu vo notification hai jo sirf tension deta hai.",
+    "Tere excuses recycled tissue paper jaise hain.",
+    "Tera focus cricket match ke rain delay jaisa hai.",
+    "Tu vo app hai jo phone slow kar deta hai.",
+    "Tera contribution group project me zero hota hai.",
+    "Tere plans expired milk jaisa kaam karte hain.",
+    "Tu vo password hai jo hamesha galat hota hai.",
+    "Tera attention span TikTok video se bhi short hai.",
+    "Tere efforts software bug jaise hain—fix hone ke baad bhi problem.",
+    "Tu vo elevator music hai jo bas bore karta hai.",
+    "Tera impact wet tissue paper jaise hai.",
+    "Tere promises Windows update ke restart time jaise hain.",
+    "Tu vo charger hai jo sirf 2% charge deta hai.",
+    "Tere arguments Bluetooth pairing error jaise hain.",
+    "Tu vo cloud storage hai jo hamesha full hota hai.",
+    "Tera output misprint newspaper jaisa hai.",
+    "Tere responses spam call se bhi irritating hote hain.",
+    "Tu vo search result hai jo irrelevant hota hai.",
+    "Tere failures calendar reminder ban jaate hain.",
+    "Tu vo elevator button hai jo kaam nahi karta.",
+    "Tera logic magic trick ka fail version hai.",
+    "Tere attempts slow internet ke page load jaisa hai."
 ]
 
 vulgar_taunts = [
+    # Original 20 vulgar ones
     "Tere jaise ch***ye logon ki wajah se hi internet slow chalta hai.",
     "Tera muh dekh ke toh kutton ka bhi bhukh mar jaata hai, bh***di.",
     "Tujhe dekhke lagta hai bhagwan bhi sochta hoga — 'kya ch***a banaya maine!'",
@@ -108,106 +102,96 @@ vulgar_taunts = [
     "Tere jaise bande ko toh log ‘delete for everyone’ ka real-life example bolte hain.",
     "Tu jab bhi bolta hai, ek ch***ye ka confidence sunai deta hai.",
     "Tere jaise lo*de ka brain lagta hai 2G pe chal raha hai abhi bhi.",
-    "Tera chehra dekh ke toh mirror bhi depression mein chala jaata hai.",
-    "Tere jaise g***u logon ki wajah se warning sirens lagte hain.",
-    "Tere muh se nikalta har shabd stupidity ka certificate hota hai.",
-    "Tere dimaag mein ideas utne hi rare hain jitne Sahara desert mein paani.",
-    "Tu IQ test karega toh result 'file not found' aayega.",
-    # --------------------
-    # EXTRA 50 VULGAR TAUNTS
-    # --------------------
-    "Tere jaise chut*ye ko toh captcha bhi reject kar deta hai.",
-    "Tera muh dekhke paint peel ho jaata hai.",
-    "Tu zindagi ka pop-up porn ad hai.",
-    "Tera brain ek virus infected pendrive hai.",
-    "Tere jokes se condom factories band ho jaati hain.",
-    "Tere saath time waste karna masturbation se bhi zyada useless hai.",
-    "Tu ek lagging porn video ka human version hai.",
-    "Tere muh se nikalta har shabd low quality meme hota hai.",
-    "Tu ek unpaid electricity bill ka insaan hai.",
-    "Tera face 'before plastic surgery fail' jaisa hai.",
-    "Tu ek glitchy porn website ka pop-up hai.",
-    "Tere jokes pe toh porn stars bhi sharminda ho jaate hain.",
-    "Tu ek broken dildo ka insaan hai.",
-    "Tere ideas condom ke bina sex jaisa – risky aur bekaar.",
-    "Tu ek expired viagra tablet ka insaan hai.",
-    "Tere saath deal karna STD lene jaisa hai.",
-    "Tu ek buffering porn scene ka bekaar climax hai.",
-    "Tere saath romance karna matlab 2G internet pe Netflix chalana.",
-    "Tu ek bekar nightstand story ka hero hai.",
-    "Tere muh se aati baatein bathroom graffiti level ki hoti hain.",
-    "Tu ek stuck toilet flush ka insaan hai.",
-    "Tere plans utne hi useless hain jitna waterproof towel.",
-    "Tu ek ganda socks ka bundle hai.",
-    "Tere saath baithna fart smell ka permanent source hai.",
-    "Tu ek ch***ya auto-correct ka example hai.",
-    "Tera attitude public toilet ke smell jaisa hai.",
-    "Tere saath friendship ek bad date ka sequel hai.",
-    "Tu ek penis enlargement spam email ka human form hai.",
-    "Tere saath kaam karna condom ke bina rollercoaster ride hai.",
-    "Tu ek XXX tape ka deleted scene hai.",
-    "Tere jokes toh porn par bhi copyright strike lagwa de.",
-    "Tere saath romance karna ek horror movie ka twist hai.",
-    "Tu ek anus pimple ka insaan hai.",
-    "Tera hairstyle ek drunk barber ka kaam hai.",
-    "Tere ideas se bas diarrhea hi ho sakta hai.",
-    "Tu ek cumshot fail ka live version hai.",
-    "Tere muh se bas cringe leak hota hai.",
-    "Tu ek fake orgasm ka acting master hai.",
-    "Tere saath life ek public washroom experience hai.",
-    "Tu ek porn site ka permanently down server hai.",
-    "Tere dimaag mein sirf hentai ka plot hota hai.",
-    "Tere muh se badbu condom factory ko band karwa de.",
-    "Tu ek adult toy ka rejected design hai.",
-    "Tera face ek STD awareness poster ka example hai.",
-    "Tere jokes toilet tissue ki tarah flimsy hain.",
-    "Tere saath time pass gonorrhea lene jaisa hai.",
-    "Tu ek XXX parody ka flop hero hai."
+    # +50 more vulgar
+    "Tera dimaag lagta hai download ke beech mein stuck ho gaya.",
+    "Tu vo porn pop-up hai jo bandh hi nahi hota.",
+    "Tere muh se nikalte hi words cancer ban jaate hain.",
+    "Tera sense of style gali ke kachre se bhi ganda.",
+    "Tu zindagi ka laggy server hai.",
+    "Tere jokes sunke dustbin bhi ro deta hai.",
+    "Tera dimaag g***u processor pe chal raha hai.",
+    "Tere muh se badbu nikalti hai jaise expired samosa.",
+    "Tere ideas utne bekaar hain jitna broken condom.",
+    "Tu us b***d ka beta hai jisko network kabhi nahi milta.",
+    "Tere liye insult words kam pad jaate hain.",
+    "Tu itna slow hai ki snails bhi tujhe overtake karein.",
+    "Tera muh ek permanent glitch hai.",
+    "Tere actions g***u ka proof hain.",
+    "Tu ek walking malware hai.",
+    "Tere liye delete ka button banaya gaya.",
+    "Tere existence se internet ka bandwidth waste hota hai.",
+    "Tu ek gali ka upgraded version hai.",
+    "Tera logic chut* ke example mein hota hai.",
+    "Tu ek porn ad ka bhi reject version hai.",
+    "Tere muh ka structure lagta hai crash hogaya.",
+    "Tere actions ka result sirf disappointment hota hai.",
+    "Tu ek live virus hai jo sabko irritate karta hai.",
+    "Tere jokes toilet flush jaise hain.",
+    "Tu ek permanent lag ka icon hai.",
+    "Tere muh ka kaam sirf bakwaas nikalna hai.",
+    "Tu ek la*de ka sample hai.",
+    "Tere ideas kabhi load nahi hote.",
+    "Tere presence se vibe khatam ho jaati hai.",
+    "Tu ek b**dk ka best example hai.",
+    "Tere liye dictionary mein alag gaali banani padegi.",
+    "Tu ek STD ka meme hai.",
+    "Tere muh ki shape failed emoji jaise hai.",
+    "Tu ek accident ka upgraded version hai.",
+    "Tere liye restart ka option bhi kaam nahi karta.",
+    "Tu ek permanent disappointment hai.",
+    "Tere actions poora system crash kar dete hain.",
+    "Tu ek porn buffering screen hai.",
+    "Tere muh ka scene ganda filter lagake nikala gaya hai.",
+    "Tu ek ch***ya ka deluxe pack hai.",
+    "Tere muh ka screenshot leak ho jaye toh log net bandh kar denge.",
+    "Tu ek ganda caption ka live version hai.",
+    "Tere muh se gaali bhi insult lagti hai.",
+    "Tu ek la*de ka bhai hai.",
+    "Tere liye insult quota khatam ho gaya.",
+    "Tu ek g***u ka overhyped edition hai.",
+    "Tere muh ka update kabhi release nahi hota.",
+    "Tu ek porn ban ka reason hai.",
+    "Tere muh ki lighting permanent blackout hai."
 ]
 
-# ----------------------------
 # UI
-# ----------------------------
 st.title("🔥 Roast Engine – Anger Release Tool")
 st.write("Kabhi kabhi gussa nikalna bhi zaroori hota hai...")
 
 # Input
 name = st.text_input("Bol Bhai Kis Pr Tujhe Gussa Aarha Hai?", placeholder="Uska Naam Likho Yahan")
 
-# Jainam detection
-if "jainam" in name.lower():
+# Jainam check (case-insensitive)
+if name and "jainam" in name.lower():
     st.markdown("**FUCK YOU**")
     st.stop()
 
-# Roast level
-level = st.radio("Roast level choose kar:", options=["Non-Vulger", "Full-Vulger🌶️"], index=0)
+level = st.radio(
+    "Roast level choose kar:",
+    options=["Non-Vulger", "Full-Vulger🌶️"],
+    index=0
+)
 
-# Session state
-if "roast_started" not in st.session_state:
-    st.session_state.roast_started = False
-if "name" not in st.session_state:
-    st.session_state.name = ""
-if "level" not in st.session_state:
-    st.session_state.level = ""
+# Session state for taunts
+if "taunts" not in st.session_state:
+    st.session_state.taunts = []
 
-# Start roast
+def generate_taunts():
+    taunt_list = savage_taunts if level == "Non-Vulger" else vulgar_taunts
+    st.session_state.taunts = random.sample(taunt_list, 3)
+
 if name:
     if st.button("Roast Start karo 💢"):
-        st.session_state.roast_started = True
-        st.session_state.name = name
-        st.session_state.level = level
+        generate_taunts()
 
-if st.session_state.roast_started:
-    taunt_list = savage_taunts if st.session_state.level == "Non-Vulger" else vulgar_taunts
-    st.subheader(f"🔥 Gussa Nikalne Ka Time Hai! {st.session_state.name} Ki Bajane Wala Roast Start 🔥")
-    st.write(f"💢 {st.session_state.name}, {random.choice(taunt_list)}")
+    if st.session_state.taunts:
+        st.subheader(f"🔥 Gussa Nikalne Ka Time Hai! {name} Ki Bajane Wala Roast Start 🔥")
+        for t in st.session_state.taunts:
+            st.write(f"💢 {name}, {t}")
 
-    # New taunt
-    if st.button("Generate New Taunt 🔄"):
-        st.write(f"💢 {st.session_state.name}, {random.choice(taunt_list)}")
+        if st.button("Generate New Taunts 🔄"):
+            generate_taunts()
+            st.rerun()
 
-    # Exit
-    if st.button("Exit ❌"):
-        st.session_state.roast_started = False
-        st.success("Program Stopped!")
-        st.stop()
+        if st.button("Exit ❌"):
+            sys.exit()
